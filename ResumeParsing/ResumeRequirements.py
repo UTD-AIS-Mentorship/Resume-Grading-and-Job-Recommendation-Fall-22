@@ -38,13 +38,13 @@ class requirements():
         return bool(re.search(r"(skills?)", self.resume.lower()))
 
     def findPhone(self):
-        pattern = re.compile(r"[(\[{]?\d{3}[]})]?[^\d]?\d{3}[^\d]?\d{4}[^\d]")
+        pattern = re.compile(r"[([{]?\d{3}[]})]?\D?\d{3}\D?\d{4}\b")
         matches = pattern.finditer(self.resume.lower())
         for match in matches:
             return match.group(0)
 
     def findStreetAddress(self):
-        pattern = re.compile(r"\b\d{1,6} +.{2,25}\b(avenue|ave|court|ct|street|st|drive|dr|lane|ln|road|rd|blvd|plaza|parkway|pkwy)[.,]?(.{0,25} +\b\d{5}\b)?")
+        pattern = re.compile(r"\b\d{1,6} +.{2,25}\b(avenue|ave|court|ct|street|st|drive|dr|lane|ln|road|rd|blvd|plaza|parkway|pkwy|suite|park|pk)[.,]?(.{0,25} +\b\d{5}\b)?")
         matches = pattern.finditer(self.resume.lower())
         for match in matches:
             return match.group(0)
@@ -93,7 +93,8 @@ class requirements():
         self.score = self.score/165*100
 def main():
     df = pd.read_csv("../Count_Vectorize_Resume_Linkedin_Keywords/resume.csv")
-    req = requirements(df["Resume_str"][0])
+    # req = requirements(df["Resume_str"][0])
+    req = requirements("(832) 943-6612")
     print(req.findExperience())
     print(req.findEducation())
     print(req.findSkills())
