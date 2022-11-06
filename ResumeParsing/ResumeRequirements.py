@@ -1,24 +1,19 @@
 import re
 import pandas as pd
-
+import spacy
 #education
-#address
-#experience: employer, dates, company name, bullet points
-#skills
-#phone number
-#websites: github, linkedin, personal website
-#relavant courses
-#gpa
-#name
+#spacy
 class requirements():
     resume = ""
     score = 0
     gpa = ""
     phone = ""
+    name = ""
     address = []
-    websites = []
+    websites = set()
     schools = []
     majors = []
+    emails = set()
 
     def __init__(self, resume):
         self.resume = resume
@@ -28,6 +23,8 @@ class requirements():
         self.websites = self.findWebsites()
         self.schools = self.findSchools()
         self.majors = self.findMajor()
+        self.emails = self.findEmail()
+        self.websites -= self.emails
 
     def __str__(self):
         return f"requirement score: {self.score}/100.0"
@@ -78,12 +75,20 @@ class requirements():
         return addresses
 
     def findWebsites(self):
-        websites = []
-        pattern = re.compile(r"[-a-zA-Z0-9@:%._\+~#=]{1,256}\.(com|net|co|org|edu|us)\b([-a-zA-Z0-9()@:%_\+~#?&=\/]*)\b")
+        websites = set()
+        pattern = re.compile(r"[-a-zA-Z0-9:%._+~#@=]{1,256}\.(com|net|co|org|edu|us)\b([-a-zA-Z0-9()@:%_\+~#?&=\/]*)\b")
         matches = pattern.finditer(self.resume.lower())
         for match in matches:
-            websites.append(match.group(0))
+            websites.add(match.group(0))
         return websites
+
+    def findEmail(self):
+        emails = set()
+        pattern = re.compile(r"[-a-zA-Z0-9:%._\+~#=]{1,256}@[-a-zA-Z0-9:%._\+~#=]{1,256}\.(com|net|co|org|edu|us)\b([-a-zA-Z0-9()@:%_\+~#?&=\/]*)\b")
+        matches = pattern.finditer(self.resume.lower())
+        for match in matches:
+            emails.add(match.group(0))
+        return emails
 
     def findGPA(self):
         pattern = re.compile(r"\b\d{1,10}\.\d{1,10}(\/\d{1,10}\.\d{1,10})?\b")
@@ -93,15 +98,15 @@ class requirements():
 
     def calcScore(self):
         if self.findEducation():
-            self.score += 20
+            self.score += 5
         else:
             print("no education found")
         if self.findExperience():
-            self.score += 100
+            self.score += 25
         else:
             print("no experience found")
         if self.findSkills():
-            self.score += 30
+            self.score += 15
         else:
             print("no skills found")
         if self.gpa is not None:
@@ -112,11 +117,27 @@ class requirements():
             self.score += 5
         else:
             print("no phone number found")
+        if self.schools is not None:
+            self.score += 7.5
+        else:
+            print("no schools found")
         if self.address is not None:
             self.score += 5
         else:
-            print("no address number found")
-        self.score = self.score/165*100
+            print("no address found")
+        if self.emails is not None:
+            self.score += 5
+        else:
+            print("no email found")
+        if self.majors is not None:
+            self.score += 7.5
+        else:
+            print("no major found")
+        if self.websites is not None:
+            self.score += 5
+        else:
+            print("no website found")
+
 def main():
     df = pd.read_csv("../Count_Vectorize_Resume_Linkedin_Keywords/resume.csv")
     req = requirements(df["Resume_str"][0])
@@ -201,6 +222,7 @@ RELEVANT SKILLS
     print(req.websites)
     print(req.findSchools())
     print(req.majors)
+    print(req.findEmail())
     print("~~~~~~~~~~~~~~~~~~~~")
     req.calcScore()
     print(req)
