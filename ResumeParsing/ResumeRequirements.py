@@ -14,6 +14,8 @@ class requirements():
     schools = []
     majors = []
     emails = set()
+    names = []
+    nlp = spacy.load("en_core_web_sm")
 
     def __init__(self, resume):
         self.resume = resume
@@ -25,9 +27,21 @@ class requirements():
         self.majors = self.findMajor()
         self.emails = self.findEmail()
         self.websites -= self.emails
+        self.names = self.find_persons()
 
     def __str__(self):
         return f"requirement score: {self.score}/100.0"
+
+    def find_persons(self):
+        # Create Doc object
+
+        doc2 = self.nlp(self.resume[:30])
+
+        # Identify the persons
+        persons = [ent.text for ent in doc2.ents if ent.label_ == 'PERSON']
+
+        # Return persons
+        return persons
 
     def findEducation(self):
         return bool(re.search(r"(education)", self.resume.lower()))
@@ -137,12 +151,16 @@ class requirements():
             self.score += 5
         else:
             print("no website found")
+        if self.names is not None:
+            self.score += 15
+        else:
+            print("no name found")
 
 def main():
     df = pd.read_csv("../Count_Vectorize_Resume_Linkedin_Keywords/resume.csv")
     req = requirements(df["Resume_str"][0])
-    req = requirements("""```
-JESSE MUSA 
+    req = requirements("""
+Jesse Musa
 
 jessemusa2@gmail.com | (832)871-2702 | github.com/jesse51002 | Plano, TX
 
@@ -212,7 +230,7 @@ RELEVANT SKILLS
 •  Libraries: Pandas, TensorFlow, Spacy, NLTK, Matplotlib, Imblearn, NumPy, Scikit Learn
 •  Framework & Tools: React.js, BigQuery, Github, Juypter Notebook, VS
 •  Classes: Data Structures and Algorithms, Unix System, Probability and Statistics in Computer Science
-```""")
+""")
     print(req.findExperience())
     print(req.findEducation())
     print(req.findSkills())
@@ -223,6 +241,7 @@ RELEVANT SKILLS
     print(req.findSchools())
     print(req.majors)
     print(req.findEmail())
+    print(req.names)
     print("~~~~~~~~~~~~~~~~~~~~")
     req.calcScore()
     print(req)
