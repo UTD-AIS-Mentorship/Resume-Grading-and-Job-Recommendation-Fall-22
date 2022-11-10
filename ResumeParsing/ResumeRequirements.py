@@ -15,7 +15,7 @@ class requirements():
     majors = []
     emails = set()
     names = []
-    nlp = spacy.load("en_core_web_sm")
+    nlp = spacy.load("en_core_web_lg")
 
     def __init__(self, resume):
         self.resume = resume
@@ -28,6 +28,7 @@ class requirements():
         self.emails = self.findEmail()
         self.websites -= self.emails
         self.names = self.find_persons()
+        self.calcScore()
 
     def __str__(self):
         return f"requirement score: {self.score}/100.0"
@@ -243,7 +244,7 @@ RELEVANT SKILLS
     print(req.findEmail())
     print(req.names)
     print("~~~~~~~~~~~~~~~~~~~~")
-    req.calcScore()
+    # req.calcScore()
     print(req)
 if __name__ == "__main__":
     main()
