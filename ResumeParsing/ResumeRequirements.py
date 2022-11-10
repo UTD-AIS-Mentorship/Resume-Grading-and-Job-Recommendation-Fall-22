@@ -1,6 +1,6 @@
 import re
 import pandas as pd
-import spacy
+# import spacy
 #education
 #spacy
 class requirements():
@@ -15,7 +15,6 @@ class requirements():
     majors = []
     emails = set()
     names = []
-    nlp = spacy.load("en_core_web_lg")
 
     def __init__(self, resume):
         self.resume = resume
@@ -27,22 +26,22 @@ class requirements():
         self.majors = self.findMajor()
         self.emails = self.findEmail()
         self.websites -= self.emails
-        self.names = self.find_persons()
+        # self.names = self.find_persons()
         self.calcScore()
 
     def __str__(self):
         return f"requirement score: {self.score}/100.0"
 
-    def find_persons(self):
-        # Create Doc object
-
-        doc2 = self.nlp(self.resume[:30])
-
-        # Identify the persons
-        persons = [ent.text for ent in doc2.ents if ent.label_ == 'PERSON']
-
-        # Return persons
-        return persons
+    # def find_persons(self):
+    #     # Create Doc object
+    #
+    #     doc2 = self.nlp(self.resume[:30])
+    #
+    #     # Identify the persons
+    #     persons = [ent.text for ent in doc2.ents if ent.label_ == 'PERSON']
+    #
+    #     # Return persons
+    #     return persons
 
     def findEducation(self):
         return bool(re.search(r"(education)", self.resume.lower()))
@@ -113,7 +112,7 @@ class requirements():
 
     def calcScore(self):
         if self.findEducation():
-            self.score += 5
+            self.score += 10
         else:
             print("no education found")
         if self.findExperience():
@@ -121,7 +120,7 @@ class requirements():
         else:
             print("no experience found")
         if self.findSkills():
-            self.score += 15
+            self.score += 25
         else:
             print("no skills found")
         if self.gpa is not None:
@@ -152,10 +151,6 @@ class requirements():
             self.score += 5
         else:
             print("no website found")
-        if self.names is not None:
-            self.score += 15
-        else:
-            print("no name found")
 
 def main():
     df = pd.read_csv("../Count_Vectorize_Resume_Linkedin_Keywords/resume.csv")
@@ -242,7 +237,6 @@ RELEVANT SKILLS
     print(req.findSchools())
     print(req.majors)
     print(req.findEmail())
-    print(req.names)
     print("~~~~~~~~~~~~~~~~~~~~")
     # req.calcScore()
     print(req)
