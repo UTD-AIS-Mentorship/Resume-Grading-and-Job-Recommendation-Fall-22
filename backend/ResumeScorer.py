@@ -21,6 +21,7 @@ class resumeScore:
     def grammarScore(self, resumeText):
         sentenceArray = self.convertToSentenceArr(resumeText)
         individualScore = []
+<<<<<<< Updated upstream
         for x in sentenceArray:
             errors = tool.check(x)
             numErrors = len(errors)
@@ -31,3 +32,38 @@ class resumeScore:
 
 
 
+=======
+        minScore = 0
+        minScoreIndex = 0
+        for idx, x in enumerate(sentenceArray):
+            errors = tool.check(x)
+            numErrors = len(errors)
+            countOfWords = len(x.split())
+            individualScore.append(
+                pow(((countOfWords - numErrors)/countOfWords), 3))
+            if individualScore[-1] < minScore:
+                minScore = individualScore[-1]
+                minScoreIndex = idx
+        cumulativeScore = (sum(individualScore)/len(individualScore))
+        return cumulativeScore, sentenceArray[minScoreIndex]
+
+    def wordChoiceScore(self, resumeText):
+        sentenceArray = self.convertToSentenceArr(resumeText)
+        score = len(sentenceArray)
+        for x in sentenceArray:
+            input_token = nltk.word_tokenize(x)
+            result = nltk.pos_tag(input_token)
+            print("Result: {}".format(result))
+            first_word_result = result[0]
+            first_word_code = first_word_result[1]
+            if first_word_code not in self.VERB_CODES:
+                score -= 1
+        score = score / len(sentenceArray)
+        if score < 0.33:
+            print(
+                "Your word choice is very poor, try using more professional words and better tense")
+        elif score < 0.66:
+            print("Your word choice is OK, try to improve certain words")
+        else:
+            print("Your word choice is amazing!")
+>>>>>>> Stashed changes
