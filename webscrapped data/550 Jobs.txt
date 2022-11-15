@@ -1,0 +1,6 @@
+550 Jobs
+
+WEB SCRAPER SCHEME
+
+{company, description, externalApplyLink, id, jobType/0, jobType/1, location, positionName, postedAt, rating, reviewsCount, salary, scrapedAt, url}
+
