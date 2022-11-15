@@ -1,10 +1,12 @@
+import nltk
+import re
 import language_tool_python
 tool = language_tool_python.LanguageTool('en-US')
-import re
+
 
 class resumeScore:
 
-    #Convert text resume to list of sentences that will be scored for grammar, diction, ETC.
+    # Convert text resume to list of sentences that will be scored for grammar, diction, ETC.
     def convertToSentenceArr(self, textpdf):
         sentenceArr = re.split(r'[\|\n\•]', textpdf)
         sentenceArr = [x.strip() for x in sentenceArr]
@@ -17,22 +19,19 @@ class resumeScore:
 
         return newArray
 
-    #Score the resume based on the average of each grammar score from each sentence.
+    # Score the resume based on the average of each grammar score from each sentence.
     def grammarScore(self, resumeText):
         sentenceArray = self.convertToSentenceArr(resumeText)
         individualScore = []
-<<<<<<< Updated upstream
         for x in sentenceArray:
             errors = tool.check(x)
             numErrors = len(errors)
             countOfWords = len(x.split())
-            individualScore.append(pow(((countOfWords - numErrors)/countOfWords), 3))
+            individualScore.append(
+                pow(((countOfWords - numErrors)/countOfWords), 3))
         cumulativeScore = (sum(individualScore)/len(individualScore))
         return cumulativeScore
 
-
-
-=======
         minScore = 0
         minScoreIndex = 0
         for idx, x in enumerate(sentenceArray):
@@ -66,4 +65,3 @@ class resumeScore:
             print("Your word choice is OK, try to improve certain words")
         else:
             print("Your word choice is amazing!")
->>>>>>> Stashed changes
