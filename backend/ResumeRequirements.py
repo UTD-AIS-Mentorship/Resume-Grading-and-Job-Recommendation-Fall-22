@@ -111,50 +111,61 @@ class requirements():
             return match.group(0)
 
     def calcScore(self):
+        self.score = 0
+        missing = []
         if self.findEducation():
             self.score += 10
         else:
-            print("no education found")
+            missing.append("education")
         if self.findExperience():
             self.score += 25
         else:
-            print("no experience found")
+            missing.append("experience")
         if self.findSkills():
             self.score += 25
         else:
-            print("no skills found")
+            missing.append("skills")
         if self.gpa is not None:
             self.score += 5
         else:
-            print("no GPA found")
+            missing.append("GPA")
         if self.phone is not None:
             self.score += 5
         else:
-            print("no phone number found")
+            missing.append("phone number")
         if self.schools is not None:
             self.score += 7.5
         else:
-            print("no schools found")
+            missing.append("schools")
         if self.address is not None:
             self.score += 5
         else:
-            print("no address found")
+            missing.append("address")
         if self.emails is not None:
             self.score += 5
         else:
-            print("no email found")
+            missing.append("email")
         if self.majors is not None:
             self.score += 7.5
         else:
-            print("no major found")
+            missing.append("major")
         if self.websites is not None:
             self.score += 5
         else:
-            print("no website found")
+            missing.append("website")
+
+        result = {}
+        if self.score == 100:
+            result = {"Score": self.score, "Description": f"Looking Good"}
+        else:
+            result = {"Score": self.score, "Description": f"Not Found: {missing}"}
+        return result
+
+
 
 def main():
-    df = pd.read_csv("../Count_Vectorize_Resume_Linkedin_Keywords/resume.csv")
-    req = requirements(df["Resume_str"][0])
+    # df = pd.read_csv("../Count_Vectorize_Resume_Linkedin_Keywords/resume.csv")
+    # req = requirements(df["Resume_str"][0])
     req = requirements("""
 Jesse Musa
 
@@ -227,6 +238,15 @@ RELEVANT SKILLS
 •  Framework & Tools: React.js, BigQuery, Github, Juypter Notebook, VS
 •  Classes: Data Structures and Algorithms, Unix System, Probability and Statistics in Computer Science
 """)
+    req = requirements("""
+    Jesse Musa
+
+    jessemusa2@gmail.com | (832)871-2702 | github.com/jesse51002 | Plano, TX
+
+    EDUCATION
+
+    The University of Texas at Dallas - Richardson, TX
+    Major: Compu""")
     print(req.findExperience())
     print(req.findEducation())
     print(req.findSkills())
@@ -238,7 +258,7 @@ RELEVANT SKILLS
     print(req.majors)
     print(req.findEmail())
     print("~~~~~~~~~~~~~~~~~~~~")
-    # req.calcScore()
+    print(req.calcScore())
     print(req)
 if __name__ == "__main__":
     main()
