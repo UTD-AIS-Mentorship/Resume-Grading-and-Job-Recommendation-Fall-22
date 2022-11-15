@@ -238,15 +238,15 @@ RELEVANT SKILLS
 •  Framework & Tools: React.js, BigQuery, Github, Juypter Notebook, VS
 •  Classes: Data Structures and Algorithms, Unix System, Probability and Statistics in Computer Science
 """)
-    req = requirements("""
-    Jesse Musa
-
-    jessemusa2@gmail.com | (832)871-2702 | github.com/jesse51002 | Plano, TX
-
-    EDUCATION
-
-    The University of Texas at Dallas - Richardson, TX
-    Major: Compu""")
+    # req = requirements("""
+    # Jesse Musa
+    #
+    # jessemusa2@gmail.com | (832)871-2702 | github.com/jesse51002 | Plano, TX
+    #
+    # EDUCATION
+    #
+    # The University of Texas at Dallas - Richardson, TX
+    # Major: Compu""")
     print(req.findExperience())
     print(req.findEducation())
     print(req.findSkills())
