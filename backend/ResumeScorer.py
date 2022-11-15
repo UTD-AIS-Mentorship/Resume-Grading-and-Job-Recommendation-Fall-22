@@ -29,8 +29,10 @@ class resumeScore:
     def grammarScore(self, resumeText):
         sentenceArray = self.convertToSentenceArr(resumeText)
         individualScore = []
+        minIndex = 0
+        minScoreIndex = 0
         wordScore = len(sentenceArray)
-        for x in sentenceArray:
+        for idx, x in enumerate(sentenceArray):
             input_token = nltk.word_tokenize(input)
             result = nltk.pos_tag(input_token)
             print("Result: {}".format(result))
@@ -44,5 +46,8 @@ class resumeScore:
             finalWordScore = wordScore/len(sentenceArray)
             individualScore.append(
                 pow(((countOfWords - numErrors)/countOfWords), 3))
+            if individualScore[-1] < minScore:
+                minScore = individualScore[-1]
+                minScoreIndex = idx
         cumulativeScore = (sum(individualScore)/len(individualScore))
-        return (cumulativeScore + finalWordScore) / 2
+        return (cumulativeScore + finalWordScore) / 2, minScoreIndex
