@@ -1,6 +1,7 @@
 import language_tool_python
 tool = language_tool_python.LanguageTool('en-US')
 import re
+import nltk
 
 from pdfminer.high_level import extract_text
 
@@ -19,17 +20,59 @@ class resumeScore:
 
         return newArray
 
-    #Score the resume based on the average of each grammar score from each sentence.
+    VERB_CODES = {
+        'VBD',  # Verb, past tense
+        'VBG',  # Verb, gerund or present participle
+        'VBN',  # Verb, past participle
+    }
+
+    # Score the resume based on the average of each grammar score from each sentence.
     def grammarScore(self, resumeText):
         sentenceArray = self.convertToSentenceArr(resumeText)
         individualScore = []
-        for x in sentenceArray:
+        minIndex = 0
+        minScoreIndex = 0
+        wordScore = len(sentenceArray)
+        for idx, x in enumerate(sentenceArray):
             errors = tool.check(x)
             numErrors = len(errors)
             countOfWords = len(x.split())
-            individualScore.append(pow(((countOfWords - numErrors)/countOfWords), 3))
+            individualScore.append(
+                pow(((countOfWords - numErrors)/countOfWords), 3))
+            if individualScore[-1] < minScore:
+                minScore = individualScore[-1]
+                minScoreIndex = idx
         cumulativeScore = (sum(individualScore)/len(individualScore))
-        return cumulativeScore
+        return {
+            "Score": cumulativeScore,
+            "Description": "This sentence: \"" + sentenceArray[minScoreIndex] + "\" has a grammer score of " + str(round(individualScore[minScoreIndex] * 100, 1)) + "/100."
+            }
+
+    def wordScore(self, resume):
+        sentenceArray = self.convertToSentenceArr(resume)
+        wordScore = len(sentenceArray)
+        for x in sentenceArray:
+            input_token = nltk.word_tokenize(input)
+            result = nltk.pos_tag(input_token)
+            #print("Result: {}".format(result))
+            first_word_result = result[0]
+            first_word_code = first_word_result[1]
+            if first_word_code not in self.VERB_CODES:
+                wordScore -= 1
+        finalWordScore = wordScore/len(sentenceArray)
+
+        message = ""
+
+        if finalWordScore <= 0.33:
+            message = "Your word choice is very poor, try using more professiona words"
+        elif finalWordScore <= 0.66:
+            message = "Your word choice is good, but some improvements can be made"
+        else:
+            message = "Your word choice is amazing"
+        return {
+            "Score": finalWordScore,
+            "Description": message
+        }
 
     def numericScore(self, resumeText):
         sentences = self.convertToSentenceArr(resumeText)
