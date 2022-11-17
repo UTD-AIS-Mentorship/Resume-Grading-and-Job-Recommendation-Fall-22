@@ -1,0 +1,7 @@
+spacy
+pandas
+numpy
+scikit-learn
+nltk
+pdfminer
+xgboost
