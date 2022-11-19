@@ -1,0 +1,63 @@
+body {
+    background-color: var(--black);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#fancytext {
+    display: inline-flex;
+}
+
+#fancytext .static-txt{
+    color: var(--grey);
+    font-size: 60px;
+    font-weight: 400;
+}
+
+#fancytext .dynamic-txt {
+    margin-left: 15px;
+    line-height: 80px;
+    height: 90px;
+    overflow: hidden;
+}
+
+.dynamic-txt li {
+    color: var(--yellow);
+    list-style: none;
+    font-size: 60px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    top: 0;
+    animation: slide 7.5s steps(5) infinite;
+    position: relative;
+}
+
+@keyframes slide {
+    100%{
+        top: -450px;
+    }
+}
+
+.dynamic-txt li span {
+    position: relative;
+}
+.dynamic-txt li span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 110%;
+    width: 100%;
+    background: var(--black);
+    border-left: 2px solid var(--yellow);
+    animation: typing 1.5s steps(10) infinite;
+}
+
+@keyframes typing {
+    100%{
+        left: 100%;
+        margin: 0 -35px 0 35px;
+    }
+}

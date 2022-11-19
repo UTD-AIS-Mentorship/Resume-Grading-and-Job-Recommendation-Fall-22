@@ -1,0 +1,27 @@
+input[type="file"] {
+    display: none;
+}
+label {
+    color: var(--grey);
+    height: 60px;
+    width: 250px;
+    background-color: var(--blue);
+    position: absolute;
+    margin: auto;
+    top: 15rem;
+    bottom: 0;
+    left: 30rem;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 300;
+    border-radius: 15px;
+    transition: all 300ms ease;
+    transform-origin: bottom;
+}
+
+label:hover {
+    transform: scale(1.05);
+}
