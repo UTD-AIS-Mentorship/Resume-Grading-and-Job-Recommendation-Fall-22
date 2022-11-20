@@ -42,7 +42,6 @@ body, html {
 
 #button:hover {
     transform: scale(1.2);
-    transform-origin: bottom right;
     
     
 }
