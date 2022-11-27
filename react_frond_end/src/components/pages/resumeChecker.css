@@ -1,0 +1,243 @@
+:root {
+    --color1: #191716; 
+    --color2: #e6af2e;
+    --color3: #E0E2DB;
+    --color4: #3D348B;
+    --color5: #BEB7A4;
+}
+
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    
+}
+
+.left {
+    left: 0;
+    background-color: #191716;
+}
+
+.right {
+    right: 0;
+    background-color: #191716;
+    overflow:hidden;
+
+}
+
+  
+
+.centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.headingText{
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    font-size: 36px;
+    color: #e0e2db;
+}
+
+#overallScore{
+    align-content: center;
+    padding-left: 40px;
+}
+
+#switchButton{
+    height: 50px;
+    width: 34%;
+    background-color: var(--color1);
+    color: var(--color3);
+    border-top:0;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 2% solid #BEB7A4;
+
+}
+#newResuButton{
+    height: 50px;
+    width: 34%;
+    background-color: var(--color1);
+    color: var(--color3);
+    border-top:0;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 2% solid #BEB7A4;
+    
+}
+#backButton{
+    height: 50px;
+    width: 32%;
+    background-color: var(--color1);
+    color: var(--color3);
+    border:none;
+}
+
+#switchButton:hover, #newResuButton:hover, #backButton:hover{
+    background-color: var(--color3);
+    color: var(--color1);
+    transition:  all 0.3s ease-out;
+    transition: 250ms;
+}
+
+.button_menu_divider{
+    width: 2%;
+    height: 50px;
+    background-color: var(--color5);
+}
+
+
+.pdf_viewer{
+    background-color: #e4e4e4;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    align-items: center;
+    height: 900px;
+    overflow-y: auto;
+    
+
+}
+
+.input_title{
+    
+    color: var(--color3);
+    font-size: 24px;
+    margin: 20px;
+    margin-bottom: 20px;
+}
+
+.input_div{
+    margin: 20px;
+    margin-top: 40px;
+    outline: auto;
+    outline-color: var(--color3);
+    outline-width: 4px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--color3);
+}
+
+input[type=file]{
+   height: 100%;
+   
+   color: var(--color1);
+
+}
+
+
+
+span{
+    margin-top: 3px;
+}
+
+
+#input_wrapper {
+    background-image:linear-gradient(to bottom right, rgba(23,14,204,1) 0%, rgba(83,0,171,1) 57%, rgba(52,7,87,1) 100%);
+    
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+}
+
+#input_wrapper > .input_card {
+    width: 30em;
+    height: 20em;
+    top:50%;
+    left:50%;
+    transform: translate(-15em, -10em);
+    position: relative;
+    background-color: var(--color1); 
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0 0.17);
+    -webkit-filter: drop-shadow(0 6px 20px rgba(0,0,0, 0.017));
+    filter: drop-shadow(0 6px 20px rgba(0, 0, 10, 0.017));
+}
+
+#input_button{
+    background-color: var(--color2);
+    color: var(--color1);
+    height: 50px;
+    width: 130px;
+    border-radius: 10px;
+    margin: 20px 20px 20px 20px;
+    margin-left: 0px;
+    border: none;
+    /* outline: auto;
+    outline-color: #E6af2e;
+    outline-width: 4px; */
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
+#back_input_button{ 
+    background-color: var(--color1);
+    color: var(--color3);
+    height: 50px;
+    width: 130px;
+    border-radius: 10px;
+    margin: 20px 20px 20px 20px;
+    outline: auto;
+    outline-color: var(--color3);
+    outline-width: 2px;
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
+#input_button:hover, #back_input_button:hover{
+    background: var(--color3);
+    color: var(--color1);
+    outline: none;
+    transition:  all 0.3s ease-out;
+    transition: 250ms;
+}
+
+iframe{
+    display: block;
+}
+/* input[type="file"] {
+    display: none;
+} */
+
+
+/* 
+
+label:hover {
+    transform: scale(1.05);
+} */
+
+/* 
+
+#input_button {
+    width: 10em;
+    height: 5em;
+    top: 70%;
+    left: 50%;
+    transform: translate(-5em, -2.5em);
+    position: absolute;
+    background-color: var(--color2);
+    transition: transform 100ms ease;
+    transform-origin: bottom right;
+}
+
+#input_button:hover {
+    transform: scale(1.2);
+
+
+}
+
+::file-selector-button {
+    display: none;
+  } */
