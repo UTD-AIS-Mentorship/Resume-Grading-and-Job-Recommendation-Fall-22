@@ -61,13 +61,35 @@ function ResumeChecker() {
 
 
 
-const handleFileSubmit=(e)=>{
-    e.preventDefault();
-    if(pdfFile!==null){
+let handleFileSubmit = async (e)=>{
+  console.log("here0")
+  e.preventDefault();
+  if(pdfFile!==null){
+    console.log("here1")
+    try{
+      console.log("here2")
+      let res = await fetch("http://127.0.0.1:5000/data", {
+        method: "POST",
+        body: JSON.stringify({
+          file: pdfFile
+        }),
+      });
+      console.log("here3")
+
+      let resJson = await res.json();
+      if (res.status === 200){
+        console.log("here")
+        console.log(resJson)
         setViewPdf(pdfFile);
-    } else {
-        setViewPdf(null);
+        
+        
+      }
+    } catch (err) {
+      console.log(err);
     }
+  } else {
+      setViewPdf(null);
+  }
 }
   
   
@@ -86,8 +108,9 @@ const handleFileSubmit=(e)=>{
                 </div>
                 <Link to='/' >
                   <button type="button" form="nameform" id="back_input_button" onClick="Home()">Back</button>     
-                </Link>        
-                <button type="button" form="nameform" id="input_button" onClick={()=> handleInputChange() } >Continue</button>
+                </Link>      
+                
+                <input id="input_button" type="submit" value="Submit" />
                 {pdfError && <span className='text-danger'>{pdfError}</span>}
               </form>
             </div>

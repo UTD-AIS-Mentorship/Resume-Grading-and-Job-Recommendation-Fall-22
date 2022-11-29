@@ -33,9 +33,9 @@ def func5(data , hashmap) :
  
 @app.route('/data' , methods = [ 'POST' , 'GET'])
 def senddata() :
+    print("in backend")
     
-    
-    data = (request.files['document'].read()).decode()
+    data = (request.files['file'].read()).decode()
 
 
 
