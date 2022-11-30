@@ -1,34 +1,36 @@
 import re
 import nltk
-import pandas as pd
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from sklearn.feature_extraction.text import CountVectorizer
+import pandas as pd
+import pickle
 from sklearn.metrics.pairwise import cosine_similarity
-
+from sklearn.feature_extraction.text import TfidfVectorizer
 nltk.download(['stopwords', 'wordnet'])
 nltk.download('omw-1.4')
 
 
 class JobRecommender:
+    # open the necessary files for processing and job recommendation
+    job_df = pd.read_csv('job_df.csv')
+    with open('skill_bank.pkl', 'rb') as f:
+        skill_bank = pickle.load(f)
+    f.close()
+    with open('job_tfidf.pkl', 'rb') as f:
+        job_tfidf = pickle.load(f)
+    f.close()
+    with open('job_words.pkl', 'rb') as f:
+        job_words = pickle.load(f)
+    f.close()
+
+    # Create the similarity matrix
+    sim_arr = cosine_similarity(job_tfidf, job_tfidf)
+
     # Process one resume at a time: the string resume
     def __init__(self, resume_str):
-        skills_path = 'linkedinskills.txt'
-        with open(skills_path, encoding='utf8') as f:
-            lines = f.readlines()
-        f.close()
-        skill_bank = []
-        for line in lines:
-            skill_bank.append(line.strip().lower())
-        self.skill_str = ' '.join(skill_bank)
+
+        # Load LinkedIn Skills to help clean resume
         self.clean_resume = self.processing(resume_str)
-        self.job_df = pd.read_csv('job_df.csv')
-        self.countVecArr = self.resume_vectorize()
-        self.simArr = self.calculateSimilarityScore()
-
-
-    def printTest(self):
-        print(self.clean_resume)
 
     def processing(self, resume_str):
         # Clean up text using NLP
@@ -50,32 +52,28 @@ class JobRecommender:
         # Remove words not part of the skills
         temp = []
         for word in review:
-            if word in self.skill_str:
+            if word in self.skill_bank:
                 temp.append(word)
         ret_str = ' '.join(temp)
 
         return ret_str
 
-    def findHighestSimJobs(self):
-        cosine_sim = cosine_similarity(self.countVecArr, self.countVecArr)
-        use = pd.DataFrame(cosine_sim)
-        use = use.drop([0, 0])
-        return self.job_df["company"].iloc[use.idxmax()[0]]
+    def find_highest_sim_jobs(self):
+        # Creating a Tfidf Vectorizer
+        query_tfidf = TfidfVectorizer().fit(JobRecommender.job_words)
+        query_tfidf = query_tfidf.transform([self.clean_resume])
+        # Create a Cosine similarity matrix to recommend jobs
+        cosine_similarities = cosine_similarity(query_tfidf, JobRecommender.job_tfidf).flatten()
+        top_10_jobs = cosine_similarities.argsort()[:-11:-1]
+        top_10_jobs_df = pd.DataFrame({"company": [], "description": [], "url": [], "similarity score": []})
+        # Create and return a dataframe composed of the top 10 job recommendations
+        counter = 0
+        for job in top_10_jobs:
+            print(JobRecommender.job_df.iloc[job]["url"])
+            top_10_jobs_df.loc[len(top_10_jobs_df.index)] = JobRecommender.job_df.iloc[job]
+            top_10_jobs_df.loc[counter]["similarity score"] = cosine_similarities[job]
+            counter += 1
+        return top_10_jobs_df
 
-    def resume_vectorize(self):
-        count = CountVectorizer(min_df=0)
-        count_matrix = count.fit_transform(self.job_df["clean!"], self.clean_resume)
-        return count_matrix
 
-    def calculateSimilarityScore(self):
-        cosine_sim = cosine_similarity(self.countVecArr, self.countVecArr)
-        use = pd.DataFrame(cosine_sim)
-        use = use.drop([0, 0])
-        # print(self.job_df["company"].iloc[use.idxmax()[0]])
-        # print(use[0].iloc[use.idxmax()[0] + 1])
 
-        return use[0].iloc[use.idxmax()[0] + 1]
-
-    if __name__ == "__main__":
-        findHighestSimJobs()
-        calculateSimilarityScore()
