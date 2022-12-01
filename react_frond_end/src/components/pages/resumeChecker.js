@@ -11,12 +11,12 @@ import VisibilitySensor from "react-visibility-sensor";
 import { Link } from "react-router-dom";
 
 
-
 function ResumeChecker() {
   
  const [option, setOption]=useState(true);
  const [input, setInput]=useState(false)
  const [pdfFile,setPdfFile]=useState(false);
+ const [rawFile, setRawFile]=useState(false);
  const [pdfError, setPdfError]=useState('');
  const [setViewPdf]=useState(false);
  const allowedFIles = ['application/pdf'];
@@ -41,7 +41,7 @@ function ResumeChecker() {
             console.log(selectedFile);
             reader.readAsDataURL(selectedFile);
 
-
+            setRawFile(e.target.files[0])
             reader.onloadend=(e)=>{
                 setPdfError('');
                 setPdfFile(e.target.result);
@@ -62,19 +62,20 @@ function ResumeChecker() {
 
 
 let handleFileSubmit = async (e)=>{
-  console.log("here0")
   e.preventDefault();
   if(pdfFile!==null){
-    console.log("here1")
     try{
+      const formData = new FormData();
+      formData.append("file", rawFile);
+
       console.log("here2")
+      
       let res = await fetch("http://127.0.0.1:5000/data", {
         method: "POST",
-        body: JSON.stringify({
-          file: pdfFile
-        }),
+        body: formData
       });
       console.log("here3")
+      
 
       let resJson = await res.json();
       if (res.status === 200){

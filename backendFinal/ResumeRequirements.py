@@ -156,9 +156,9 @@ class requirements():
 
         result = {}
         if self.score == 100:
-            result = {"Score": self.score, "Description": f"Looking Good"}
+            result = {"Score": self.score / 100, "Description": f"Looking Good"}
         else:
-            result = {"Score": self.score, "Description": f"Not Found: {missing}"}
+            result = {"Score": self.score / 100, "Description": f"Not Found: {missing}"}
         return result
 
 
