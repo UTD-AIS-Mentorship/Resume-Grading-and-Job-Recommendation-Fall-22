@@ -3,26 +3,22 @@ import JobCardItem from './JobCardItem'
 import './JobCards.css';
 import Carousel from '../other_components/Carousel';
 
-function JobCards() {
+function JobCards(data) {
     
   return (
     <div >
         <Carousel>
-            <div className='cards__container'><div className='cards__wrapper'><JobCardItem text="Sample Text" company="Job Company" location="Job Location" path='' percent= { 90 }/></div></div>
-            <div className='cards__container'><div className='cards__wrapper'><JobCardItem text="Sample Text" company="Job Company" location="Job Location" path='' percent= { 90 }/></div></div>
-            <div className='cards__container'><div className='cards__wrapper'><JobCardItem text="Sample Text" company="Job Company" location="Job Location" path='' percent= { 90 }/></div></div>
-            
-
-            
-            
-            <div className='cards__container'><div className='cards__wrapper'><JobCardItem text="Sample Text" company="Job Company" location="Job Location" path='' percent= { 90 }/></div></div>
-            <div className='cards__container'><div className='cards__wrapper'><JobCardItem text="Sample Text" company="Job Company" location="Job Location" path='' percent= { 90 }/></div></div>
-            <div className='cards__container'><div className='cards__wrapper'><JobCardItem text="Sample Text" company="Job Company" location="Job Location" path='' percent= { 90 }/></div></div>
-            <div className='cards__container'><div className='cards__wrapper'><JobCardItem text="Sample Text" company="Job Company" location="Job Location" path='' percent= { 90 }/></div></div>
-            <div className='cards__container'><div className='cards__wrapper'><JobCardItem text="Sample Text" company="Job Company" location="Job Location" path='' percent= { 90 }/></div></div>
-            <div className='cards__container'><div className='cards__wrapper'><JobCardItem text="Sample Text" company="Job Company" location="Job Location" path='' percent= { 90 }/></div></div>
-            <div className='cards__container'><div className='cards__wrapper'><JobCardItem text="Sample Text" company="Job Company" location="Job Location" path='' percent= { 90 }/></div></div>
-  
+          {
+       
+            data['jobInfo'].map( (value) => ( 
+             <JobCardItem text={value['positionName']} 
+              company={value['company']} 
+              location={value['location']} 
+              path={value['url']} 
+              percent= {Math.round(value['similarity score'] * 100)}/>
+               ))   
+                  
+          }
         </Carousel>
     </div>      
            

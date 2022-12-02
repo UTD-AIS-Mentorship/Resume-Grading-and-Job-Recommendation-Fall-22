@@ -1,27 +1,49 @@
-body {
-    background-color: var(--black);
-    overflow: hidden;
+
+
+#fancytext {
+    width:100%;
+   
+}
+
+#fancy_split{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    /* background-color: beige; */
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
 }
 
-#fancytext {
-    display: inline-flex;
-}
-
-#fancytext .static-txt{
+.static-txt{
     color: var(--grey);
     font-size: 60px;
     font-weight: 400;
+    padding-left: 0%;
+    width:fit-content;
+    display: inline-block;
+    flex-direction: row;
+    padding-top: -40px;
+    line-height: 60px;
+    height: 90px;
+    
+}
+
+.dynamic-txt-spacing{
+    display: inline-block;
+    padding-bottom: 20px;
 }
 
 #fancytext .dynamic-txt {
     margin-left: 15px;
     line-height: 80px;
     height: 90px;
+    
     overflow: hidden;
+    
+    
 }
 
 .dynamic-txt li {
@@ -31,8 +53,11 @@ body {
     font-weight: 500;
     margin-bottom: 10px;
     top: 0;
+    
+    
     animation: slide 7.5s steps(5) infinite;
     position: relative;
+    
 }
 
 @keyframes slide {
@@ -53,11 +78,40 @@ body {
     background: var(--black);
     border-left: 2px solid var(--yellow);
     animation: typing 1.5s steps(10) infinite;
+    
 }
 
 @keyframes typing {
     100%{
         left: 100%;
-        margin: 0 -35px 0 35px;
+        margin: 0 -35px  0 35px;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    #fancy_split{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 10px;
+        /* background-color: beige; */
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .static-txt{
+        color: var(--grey);
+        font-size: 45px;
+        font-weight: 400;
+        padding-left: 0%;
+        width:fit-content;
+        display: inline-block;
+        flex-direction: row;
+        padding-top: -40px;
+        line-height: 60px;
+        height: 90px;
+        
     }
 }

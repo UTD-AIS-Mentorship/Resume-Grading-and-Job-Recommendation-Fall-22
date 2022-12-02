@@ -121,17 +121,17 @@
     outline: auto;
     outline-color: var(--color3);
     outline-width: 4px;
-    padding: 20px;
+    padding: 40px;
     border-radius: 10px;
     background-color: var(--color3);
 }
 
-input[type=file]{
+/* input[type=file]{
    height: 100%;
    
    color: var(--color1);
 
-}
+} */
 
 
 
@@ -163,6 +163,8 @@ span{
     -webkit-filter: drop-shadow(0 6px 20px rgba(0,0,0, 0.017));
     filter: drop-shadow(0 6px 20px rgba(0, 0, 10, 0.017));
 }
+
+
 
 #input_button{
     background-color: var(--color2);
@@ -207,37 +209,5 @@ span{
 iframe{
     display: block;
 }
-/* input[type="file"] {
-    display: none;
-} */
 
 
-/* 
-
-label:hover {
-    transform: scale(1.05);
-} */
-
-/* 
-
-#input_button {
-    width: 10em;
-    height: 5em;
-    top: 70%;
-    left: 50%;
-    transform: translate(-5em, -2.5em);
-    position: absolute;
-    background-color: var(--color2);
-    transition: transform 100ms ease;
-    transform-origin: bottom right;
-}
-
-#input_button:hover {
-    transform: scale(1.2);
-
-
-}
-
-::file-selector-button {
-    display: none;
-  } */

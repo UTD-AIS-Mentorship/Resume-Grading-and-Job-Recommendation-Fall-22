@@ -12,7 +12,7 @@ nltk.download('omw-1.4')
 
 class JobRecommender:
     # open the necessary files for processing and job recommendation
-    job_df = pd.read_csv('job_df.csv')
+    job_df = pd.read_csv('job_df.csv', encoding='cp1252')
     with open('skill_bank.pkl', 'rb') as f:
         skill_bank = pickle.load(f)
     f.close()
@@ -65,7 +65,7 @@ class JobRecommender:
         # Create a Cosine similarity matrix to recommend jobs
         cosine_similarities = cosine_similarity(query_tfidf, JobRecommender.job_tfidf).flatten()
         top_10_jobs = cosine_similarities.argsort()[:-11:-1]
-        top_10_jobs_df = pd.DataFrame({"company": [], "description": [], "url": [], "similarity score": []})
+        top_10_jobs_df = pd.DataFrame({"company": [], "positionName": [], "url": [], "similarity score": [], "location":[]})
         # Create and return a dataframe composed of the top 10 job recommendations
         counter = 0
         for job in top_10_jobs:
@@ -73,7 +73,14 @@ class JobRecommender:
             top_10_jobs_df.loc[len(top_10_jobs_df.index)] = JobRecommender.job_df.iloc[job]
             top_10_jobs_df.loc[counter]["similarity score"] = cosine_similarities[job]
             counter += 1
-        return top_10_jobs_df.values.tolist()
-
-
-
+        
+        return [
+                {
+                "company": x["company"],
+                "positionName": x["positionName"],
+                "url": x["url"],
+                "location": x["location"],
+                "similarity score": x["similarity score"],
+                } 
+                for i,x in top_10_jobs_df.iterrows()
+            ]

@@ -1,3 +1,10 @@
+:root {
+    --blue:#3D348B;
+    --yellow: #E6AF2E;
+    --grey: #E0E2DB;
+    --black: #191716;
+}
+
 .hero-container{
     height: 100vh;
     width: 100%;
@@ -7,6 +14,7 @@
     align-items: center;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.2);
     object-fit: contain;
+    background-color: var(--black);
 }
 
 .hero-container > h1 {

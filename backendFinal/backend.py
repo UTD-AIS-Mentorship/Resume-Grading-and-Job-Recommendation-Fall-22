@@ -9,6 +9,7 @@ import ResumeScorer
 import xgb_model
 import ResumeToText
 from ResumeRequirements import requirements
+from JobRecommender import JobRecommender
 
 import nltk
 from nltk.stem.snowball import SnowballStemmer
@@ -29,17 +30,17 @@ def func1(data , hashmap) :
 
 def func2(data , hashmap) :
     Resume_Req = requirements(data)
-    hashmap['Resume_Requirements'] = Resume_Req.calcScore()
+    hashmap['Resume Requirements'] = Resume_Req.calcScore()
 
 def func3(data , hashmap) :
-    hashmap['grammar_score'] = Resume_scorer.grammarScore(data)
+    hashmap['Grammar score'] = Resume_scorer.grammarScore(data)
     
 def func4(data , hashmap) :
-    hashmap['word_score'] = Resume_scorer.wordScore(data)
-    
+    hashmap['Word Score'] = Resume_scorer.wordScore(data)
+     
     
 def func5(data , hashmap) :
-    hashmap['numeric_score'] = Resume_scorer.numericScore(data)
+    hashmap['Numeric Score'] = Resume_scorer.numericScore(data)
 
 def func6(data , hashmap) :
     f = JobRecommender(data)
@@ -83,7 +84,7 @@ def senddata() :
     t3 = threading.Thread(target=func3, args=(data,scores))
     t4 = threading.Thread(target=func4, args=(data,scores))
     t5 = threading.Thread(target=func5, args=(data,scores))
-    t6 = threading.Thread(target=func6, args=(data,scores))
+    t6 = threading.Thread(target=func6, args=(data,result))
 
     t1.start()
     t2.start()
@@ -105,8 +106,11 @@ def senddata() :
     
     result['scores'] = scores
     
+    print("here")
+    print(jsonify(result))
+
     return result
 
  
 if __name__ == '__main__':
-   app.run(debug = True)
+   app.run()

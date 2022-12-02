@@ -52,14 +52,17 @@ class resumeScore:
         sentenceArray = self.convertToSentenceArr(resume)
         wordScore = len(sentenceArray)
         for x in sentenceArray:
-            input_token = nltk.word_tokenize(resume)
+            input_token = nltk.word_tokenize(x)
             result = nltk.pos_tag(input_token)
             #print("Result: {}".format(result))
             first_word_result = result[0]
             first_word_code = first_word_result[1]
+            print(first_word_result, first_word_code)
             if first_word_code not in self.VERB_CODES:
                 wordScore -= 1
         finalWordScore = wordScore/len(sentenceArray)
+
+        print(sentenceArray)
 
         message = ""
 

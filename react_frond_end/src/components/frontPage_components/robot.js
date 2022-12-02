@@ -1,24 +1,21 @@
 const robot = document.getElementById("Robot");
 
-let prev = 0;
-let mainInterval;
+
+
 let combination = 0;
 
 const startInterval = () => {
-    mainInterval = setInterval(() => {
+    setInterval(() => {
         combination = combination === 4? 0 : combination+1;
         robot.dataset.configuration = combination;
-        prev = index;
+        
         }, 1000);
 }
 
-const stopInterval = () => {
-    clearInterval(mainInterval);
-}
 
 startInterval();
 
-robot.addEventListener("click", clickToggle)
+//robot.addEventListener("click", clickToggle)
 document.addEventListener('mousemove', (e)=> {
     const mouseX =e.clientX;
     const mouseY =e.clientY;
@@ -39,7 +36,7 @@ function angle(cx, cy, ex, ey) {
     return rad;
 }
 
-function clickToggle() {
-    robot.dataset.click = robot.dataset.click === 1? 0 : 1;
-    console.log(robot.dataset.click)
-}
+// function clickToggle() {
+//     robot.dataset.click = robot.dataset.click === 1? 0 : 1;
+//     console.log(robot.dataset.click)
+// }

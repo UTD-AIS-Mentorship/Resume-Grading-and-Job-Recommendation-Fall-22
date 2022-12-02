@@ -2,37 +2,16 @@ import React from 'react'
 import GradeCardItem from './GradeCardItem'
 import './GradeCards.css';
 
-function GradeCards() {
+function GradeCards(data) {
   return (
-    <div >
+    <div>
         <div className='cards__container'>
             <div className='cards__wrapper'>
-                
-                    <GradeCardItem 
+                    
+                    {
+                        Object.keys(data['gradesInfo']).map((key, index) => (<GradeCardItem title={key} desc={data['gradesInfo'][key]["Description"]} percent= {Math.round(data['gradesInfo'][key]["Score"] * 100)}/> ))
                         
-                        title="Filler"
-                        desc="Filler"
-                        percent= { 90 }
-                    />
-                    <GradeCardItem 
-                        
-                        title="Filler"
-                        desc="Filler"
-                        percent= { 90 }
-                    />
-                    <GradeCardItem 
-                        
-                        title="Filler"
-                        desc="Filler"
-                        percent= { 90 }
-                    />
-                    <GradeCardItem 
-                        
-                        title="Filler"
-                        desc="Filler"
-                        percent= { 90 }
-                    />
-                
+                    }
             </div>
         </div>
       

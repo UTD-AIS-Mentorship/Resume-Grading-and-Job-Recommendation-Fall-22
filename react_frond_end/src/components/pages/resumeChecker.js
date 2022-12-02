@@ -9,6 +9,7 @@ import { CircularProgressbar,buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css"
 import VisibilitySensor from "react-visibility-sensor";
 import { Link } from "react-router-dom";
+import resumeData from "../../data.js"
 
 
 function ResumeChecker() {
@@ -16,11 +17,17 @@ function ResumeChecker() {
  const [option, setOption]=useState(true);
  const [input, setInput]=useState(false)
  const [pdfFile,setPdfFile]=useState(false);
- const [rawFile, setRawFile]=useState(false);
+ const [rawFile, setRawFile] = useState(false);
  const [pdfError, setPdfError]=useState('');
+ 
+  const [totalScore, setTotalScore] = useState(false)
+  const [gradesData, setGradeData] = useState(false)
+  const [jobData, setJobData] = useState(false);
+  const [catData, setCatData] = useState(false);
+
  const [setViewPdf]=useState(false);
  const allowedFIles = ['application/pdf'];
- 
+
 
   const handleSwitchChange = () => {
       return setOption(!option);
@@ -32,6 +39,7 @@ function ResumeChecker() {
     return setInput(!input)
   }
 
+  
   const handleFileChange = (e) =>{
     let selectedFile = e.target.files[0];
     localStorage.setItem("backup", selectedFile);
@@ -39,9 +47,12 @@ function ResumeChecker() {
         if(selectedFile && allowedFIles.includes(selectedFile.type)){
             let reader = new FileReader();
             console.log(selectedFile);
-            reader.readAsDataURL(selectedFile);
 
             setRawFile(e.target.files[0])
+
+            reader.readAsDataURL(selectedFile);
+
+
             reader.onloadend=(e)=>{
                 setPdfError('');
                 setPdfFile(e.target.result);
@@ -61,28 +72,38 @@ function ResumeChecker() {
 
 
 
-let handleFileSubmit = async (e)=>{
+let handleFileSubmit= async (e)=>{
   e.preventDefault();
+  
+  //setGradeData(resJson["scores"])
+  //setJobData(resumeData['similarjobs'])
+   
+  //setCatData(resumeData['predicition'])
+
+  //setInput(true)
+  //let resJson = resumeData
+  //console.log(resumeData)
+  
   if(pdfFile!==null){
     try{
       const formData = new FormData();
       formData.append("file", rawFile);
 
-      console.log("here2")
-      
       let res = await fetch("http://127.0.0.1:5000/data", {
         method: "POST",
         body: formData
       });
-      console.log("here3")
-      
 
-      let resJson = await res.json();
       if (res.status === 200){
-        console.log("here")
-        console.log(resJson)
-        setViewPdf(pdfFile);
         
+        let resJson = await res.json();
+        console.log(resJson)
+        setGradeData(resJson['scores'])
+        setTotalScore(resJson['TotalScore'])
+        setCatData(resJson['prediction'])
+        setJobData(resJson['similarjobs'])
+        setInput(true)
+        //setViewPdf(pdfFile);
         
       }
     } catch (err) {
@@ -90,12 +111,12 @@ let handleFileSubmit = async (e)=>{
     }
   } else {
       setViewPdf(null);
-  }
+  } 
 }
   
   
   return (
-   
+    
     <>
       {!input ?
         <div className="pdf_container">
@@ -106,12 +127,14 @@ let handleFileSubmit = async (e)=>{
 
                 <div className='input_div'>
                 <input type='file' className='input_submit' onChange={handleFileChange}></input>
+                
                 </div>
                 <Link to='/' >
                   <button type="button" form="nameform" id="back_input_button" onClick="Home()">Back</button>     
                 </Link>      
                 
-                <input id="input_button" type="submit" value="Submit" />
+                <input id="input_button" type="submit" value="Submit"  />
+                
                 {pdfError && <span className='text-danger'>{pdfError}</span>}
               </form>
             </div>
@@ -128,7 +151,7 @@ let handleFileSubmit = async (e)=>{
               <div id="overallScore" style={{ width: 250, height: 250 }}>
                 <VisibilitySensor>
                   {({ isVisible }) => {
-                  const percentage = isVisible ? 90 : 0;
+                  const percentage = isVisible ? Math.round(totalScore * 100) : 0;
                     return (
                       <CircularProgressbar value={percentage} 
                         text={`${percentage}%`} 
@@ -142,14 +165,14 @@ let handleFileSubmit = async (e)=>{
                 </VisibilitySensor>
               </div>
               <h2 class="headingText">Sub Scores:</h2>
-              <GradeCards/>
+              <GradeCards gradesInfo={gradesData}/>
             </div>
             : 
             <div id="mydivoff" class="split left">
               <h2 class="headingText">Top 3 Job Categories:</h2>
-              <CategoryCards/>
+              <CategoryCards catInfo = {catData}/>
               <h2 class="headingText">Reccomended Jobs:</h2>
-              <JobCards/>
+               <JobCards jobInfo = {jobData} /> 
             </div>
           }
             
@@ -160,8 +183,12 @@ let handleFileSubmit = async (e)=>{
                     <button type="button" form="nameform" id="switchButton" onClick={()=> handleSwitchChange() } >Switch Mode</button>
                     
                     <button type="button" form="nameform" id="newResuButton" onClick={()=> handleInputChange()}>New Resume</button>
+
+                    <Link to='/' >
+                      <button type="button" form="nameform" id="backButton"  onClick={()=> handleInputChange()}>Back</button>
+                    </Link>
                     
-                    <button type="button" form="nameform" id="backButton"  onChange="">Back</button>
+                    
                     
             
                     
@@ -180,6 +207,8 @@ let handleFileSubmit = async (e)=>{
     
   );
 }
+
+
 
 export default ResumeChecker;
  //<PDFViewerReact document={{ url: pdfFile}} hideNavbar={true} scale={1.5}/>
