@@ -52,7 +52,7 @@ class resumeScore:
         sentenceArray = self.convertToSentenceArr(resume)
         wordScore = len(sentenceArray)
         for x in sentenceArray:
-            input_token = nltk.word_tokenize(x)
+            input_token = nltk.word_tokenize(re.sub(r"[^\w ]", "",x))
             result = nltk.pos_tag(input_token)
             #print("Result: {}".format(result))
             first_word_result = result[0]
@@ -62,7 +62,6 @@ class resumeScore:
                 wordScore -= 1
         finalWordScore = wordScore/len(sentenceArray)
 
-        print(sentenceArray)
 
         message = ""
 

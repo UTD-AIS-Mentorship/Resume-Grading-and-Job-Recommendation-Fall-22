@@ -33,7 +33,7 @@ def func2(data , hashmap) :
     hashmap['Resume Requirements'] = Resume_Req.calcScore()
 
 def func3(data , hashmap) :
-    hashmap['Grammar score'] = Resume_scorer.grammarScore(data)
+    hashmap['Grammar Score'] = Resume_scorer.grammarScore(data)
     
 def func4(data , hashmap) :
     hashmap['Word Score'] = Resume_scorer.wordScore(data)
@@ -101,7 +101,7 @@ def senddata() :
     t5.join()
     t6.join()
     
-    result['TotalScore'] = (50 * scores['grammar_score']['Score'] + 20 * scores['Resume_Requirements']['Score'] + 15 * (scores['word_score']['Score'] + scores['numeric_score']['Score'] ) )/ 100
+    result['TotalScore'] = (50 * scores['Grammar Score']['Score'] + 20 * scores['Resume Requirements']['Score'] + 15 * (scores['Word Score']['Score'] + scores['Numeric Score']['Score'] ) )/ 100
                             
     
     result['scores'] = scores
