@@ -42,10 +42,10 @@
     flex: 1;
     margin: 0 1rem;
     width: 100%;
-    min-height: 200px;
-    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
-    -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
-    filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+    min-height: 100px;
+    box-shadow: 0 6px 20px rgba(0,0,0, 0.17);
+    -webkit-filter: drop-shadow(0 6px 20px rgba(50,0,0, 0.017));
+    filter: drop-shadow(0 6px 20px rgba(0,0,0, 0.017));
     border-radius: 10px;
     background-color: #262652;
     overflow: hidden;
@@ -93,7 +93,7 @@
   
   .catCards__item__categoryText {
     color: var(--color3);
-    font-size: 18px;
+    font-size: 10vw;
     line-height: 24px;
     margin-bottom: 10px;
     margin-top: 30px;
@@ -117,9 +117,8 @@
     color: var(--color3);
     font-size: 36px;
     line-height: 24px;
-    margin-bottom: 20px;
-    margin-top: 30px;
-    margin-left: 30px;
+    margin-left: 20px;
+    
   }
 
   .catCards_left{
@@ -130,6 +129,10 @@
     top: 0;
     overflow: hidden;
     left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-around; */
   }
   .catCards_right{
     height: 100%;
@@ -139,6 +142,10 @@
     top: 0;
     overflow: hidden;
     right: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around; 
   }
 
   .rank_square {

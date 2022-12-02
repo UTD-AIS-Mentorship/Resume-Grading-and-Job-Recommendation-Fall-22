@@ -34,7 +34,7 @@ const Carousel = (props) => {
                 <div className='carousel-content-wrapper' >
                     <div 
                         className='carousel-content'
-                        style={{transform: `translateX(-${currentIndex * 90}%)`}}
+                        style={{transform: `translateX(-${currentIndex * 100}%)`}}
                     >
                         {children}
                     </div>

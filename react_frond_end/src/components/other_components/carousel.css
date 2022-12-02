@@ -7,6 +7,7 @@
 }
 
 .carousel-wrapper {
+    
     display: flex;
     width: 100%;
     position: relative;
@@ -16,14 +17,26 @@
     overflow: hidden;
     width: 100%;
     height: 100%;
+    
 }
 
 .carousel-content {
+    width: calc(100% - 150px);
+    /* height: calc(100% - 150px); */
+    /* width:90%;
+    height:90%; */
+    top: 10px;
+    margin-left: 75px;
+    margin-bottom: 75px;
     display: flex;
     transition: all 250ms linear;
     -ms-overflow-style: none; 
-    scrollbar-width: none;  
+    scrollbar-width: none; 
   
+}
+
+.children {
+  width: 100%;
 }
 
 /* hide scrollbar in webkit browser */
@@ -35,6 +48,7 @@
     width: 100%;
     flex-shrink: 0;
     flex-grow: 0;
+    
     
 }
 

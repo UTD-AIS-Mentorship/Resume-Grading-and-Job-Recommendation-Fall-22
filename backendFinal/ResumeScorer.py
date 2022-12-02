@@ -57,7 +57,6 @@ class resumeScore:
             #print("Result: {}".format(result))
             first_word_result = result[0]
             first_word_code = first_word_result[1]
-            print(first_word_result, first_word_code)
             if first_word_code not in self.VERB_CODES:
                 wordScore -= 1
         finalWordScore = wordScore/len(sentenceArray)

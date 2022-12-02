@@ -4,14 +4,22 @@ import React from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css"
 import VisibilitySensor from "react-visibility-sensor";
+import { NavLink } from "react-router-dom";
 
 function JobCardItem(props) {
-   
+    const openInNewTab = url => {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      };
   return (
     <>
             <div className="jobCards__item__link" >
                 <div className='jobCards__item__bottom'>
-                    <button className='jobCards__item__btn' to={props.path}> APPLY </button>
+                <a href={props.path} target="_blank" rel="noopener noreferrer">
+                        <button className='jobCards__item__btn'  > APPLY </button>
+                </a>
+
+                
+                    
                 </div> 
                 <div className="jobCards__item__left">
                     <h3 className='cards__item__jobTitle'>{props.text}</h3>

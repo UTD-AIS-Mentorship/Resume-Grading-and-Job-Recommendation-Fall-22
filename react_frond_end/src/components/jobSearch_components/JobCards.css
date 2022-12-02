@@ -8,6 +8,7 @@
 
 .cards {
     padding: 16rem;
+    /* padding: 10 10 10 10; */
     
   }
   
@@ -19,21 +20,25 @@
     display: relative;
     flex-flow: column;
     align-items: center;
+    width: 100%;
     
-    
-    margin: 0 auto;
+   
   }
   
   .cards__wrapper {
     position: absolute;
     margin: fixed;
-    width: 100px;
   }
   
   .cards__items {
     margin-bottom: 24px;
-    
+    /* padding: 10 10 10 10; */
   
+  }
+
+  .job_div{
+    /* margin: 10 10 10 10; */
+    padding: 10 10 10 10;
   }
 
   .jobCards__item__link {
@@ -41,18 +46,18 @@
     flex: 0;
     height: 350px;
     flex-flow: column;
-    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
-    -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
-    filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+    box-shadow: 0 50px 20px rgba(0,0,0, 0.17);
+    -webkit-filter: drop-shadow(0 50px 20px rgba(0,0,0, 0.017));
+    filter: drop-shadow(0 50px 20px rgba(0,0,0, 0.017));
     border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
-    
     background-color: #262652;
+    /* padding: 10px 10px 10px 10px; */
   }
 
   .jobCards__item__left{
-    height: 80%;
+    
     width: 60%;
     position: fixed;
     z-index: 1;
@@ -90,18 +95,18 @@
   
   .cards__item__jobTitle{
     color: var(--color3);
-    font-size: 35px;
+    font-size: 25px;
     text-align: center;
-    line-height: 24px;
-    margin-top: 70px;
-    margin-bottom: 30px;
+    line-height: 30px;
+    margin-top: 40px;
+    
   }
 
   .cards__item__jobCompany {
     color: var(--color5);
-    font-size: 25px;
+    font-size: 20px;
     text-align: center;
-    line-height: 24px;
+    line-height: 20px;
     margin-bottom: 20px;
     margin-top:30px
   }
@@ -114,7 +119,7 @@
     text-align: center;
     line-height: 24px;
     margin-bottom: 10px;
-    margin-top:20px;
+    margin-top:10px;
   }
   
 

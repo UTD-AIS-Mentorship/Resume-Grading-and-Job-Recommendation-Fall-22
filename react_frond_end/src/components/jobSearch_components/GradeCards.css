@@ -38,15 +38,15 @@
   .cards__item__link {
     display: flex;
     flex:1;
-    margin: 0 1rem;
+    padding: 10 10 10 10;
     border-radius: 10px;
     margin-bottom: 30px;
     flex-flow: column;
     width: 100%;
     min-height: 225px;
-    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
-    -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
-    filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+    box-shadow: 0 6px 20px rgba(0,0,0, 0.17);
+    -webkit-filter: drop-shadow(0 6px 20px rgba(0,0,0, 0.017));
+    filter: drop-shadow(0 6px 20px rgba(0,0,0, 0.017));
     border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
@@ -80,6 +80,7 @@
     max-height: 100%;
     object-fit: cover;
     transition: all 0.2s linear;
+    padding-bottom: 50px;
   }
   
   .cards__item__img:hover {
@@ -89,7 +90,7 @@
   
   .cards__item__info {
     padding: 20px 30px 30px;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     height: 100%;
     width: 90%;
   }
@@ -102,6 +103,7 @@
     position: fixed;
     z-index: 1;
     top: 0;
+    overflow: hidden;
     
   }
   #splitLeft{
@@ -111,6 +113,7 @@
     position: flex;
     z-index: 1;
     top: 0;
+    overflow: hidden;
 
     
   }

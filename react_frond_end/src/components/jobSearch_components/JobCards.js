@@ -9,17 +9,29 @@ function JobCards(data) {
     <div >
         <Carousel>
           {
-       
             data['jobInfo'].map( (value) => ( 
-             <JobCardItem text={value['positionName']} 
-              company={value['company']} 
-              location={value['location']} 
-              path={value['url']} 
-              percent= {Math.round(value['similarity score'] * 100)}/>
-               ))   
+              <div className='job_div'>
+                <JobCardItem text={value['positionName']} 
+                  company={value['company']} 
+                  location={value['location']} 
+                  path={value['url']} 
+                  percent= {Math.round(Math.pow(value['similarity score'], 1/7) * 100)}/>
                   
+             </div>
+              
+                  
+            ))
+
+              
+                      
           }
+
+            
+              
         </Carousel>
+        
+        
+        
     </div>      
            
   )

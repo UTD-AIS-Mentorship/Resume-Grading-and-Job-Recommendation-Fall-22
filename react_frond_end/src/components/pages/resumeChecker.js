@@ -19,7 +19,7 @@ function ResumeChecker() {
  const [pdfFile,setPdfFile]=useState(false);
  const [rawFile, setRawFile] = useState(false);
  const [pdfError, setPdfError]=useState('');
- 
+ const [submit, setSubmit]=useState(false);
   const [totalScore, setTotalScore] = useState(false)
   const [gradesData, setGradeData] = useState(false)
   const [jobData, setJobData] = useState(false);
@@ -47,6 +47,7 @@ function ResumeChecker() {
         if(selectedFile && allowedFIles.includes(selectedFile.type)){
             let reader = new FileReader();
             console.log(selectedFile);
+            setSubmit(true);
 
             setRawFile(e.target.files[0])
 
@@ -83,16 +84,20 @@ let handleFileSubmit= async (e)=>{
   //setInput(true)
   //let resJson = resumeData
   //console.log(resumeData)
+
   
   if(pdfFile!==null){
     try{
       const formData = new FormData();
       formData.append("file", rawFile);
 
+      
+
       let res = await fetch("http://127.0.0.1:5000/data", {
         method: "POST",
         body: formData
       });
+
 
       if (res.status === 200){
         
@@ -113,11 +118,16 @@ let handleFileSubmit= async (e)=>{
       setViewPdf(null);
   } 
 }
-  
+// document.getElementById("input_button").disabled = true;
+//   var myInput = document.getElementById("input_button");
+//   if (myInput.value.length > 0){
+//     document.getElementById("input_button").disabled = false;
+//   }
+
   
   return (
     
-    <>
+    <div id="master_container">
       {!input ?
         <div className="pdf_container">
           <div id="input_wrapper">
@@ -132,8 +142,8 @@ let handleFileSubmit= async (e)=>{
                 <Link to='/' >
                   <button type="button" form="nameform" id="back_input_button" onClick="Home()">Back</button>     
                 </Link>      
-                
-                <input id="input_button" type="submit" value="Submit"  />
+                {!submit ?  <input disabled id="input_button" type="submit" value="Submit"  /> :  <input enabled id="input_button" type="submit" value="Submit"  /> }
+               
                 
                 {pdfError && <span className='text-danger'>{pdfError}</span>}
               </form>
@@ -146,29 +156,41 @@ let handleFileSubmit= async (e)=>{
       :
         <div className="pdf_container">
           {option ?
-            <div id="mydivon" class="split left">
+            <div id="mydivon" class="split_left">
               <h2 class="headingText">Overall Score:</h2>
-              <div id="overallScore" style={{ width: 250, height: 250 }}>
-                <VisibilitySensor>
-                  {({ isVisible }) => {
-                  const percentage = isVisible ? Math.round(totalScore * 100) : 0;
-                    return (
-                      <CircularProgressbar value={percentage} 
-                        text={`${percentage}%`} 
-                        styles={buildStyles({
-                          textColor: "#e0e2db",
-                          pathColor: "#e6af2e",
-                          trailColor: "#e0e2db"
-                        })}/>
-                    );
-                  }}
-                </VisibilitySensor>
+              <div id="topper_wrapper">
+                <div id="overallScore" style={{ width: 250, height: 250 }}>
+                  <VisibilitySensor>
+                    {({ isVisible }) => {
+                    const percentage = isVisible ? Math.round(totalScore * 100) : 0;
+                      return (
+                        <CircularProgressbar value={percentage} 
+                          text={`${percentage}%`} 
+                          styles={buildStyles({
+                            textColor: "#e0e2db",
+                            pathColor: "#e6af2e",
+                            trailColor: "#e0e2db"
+                          })}/>
+                      );
+                    }}
+                  </VisibilitySensor>
+                </div>
+                <div id="side_blurb">
+                  <h4>Our Total Score Distribution is calculated by:</h4>
+                  <ul>
+                    <li>Grammar - 50%</li>
+                    <li>Resume Requirements - 20%</li>
+                    <li>Word Score - 15%</li>
+                    <li>Numeric Score- 15%</li>
+                  </ul>
+                  <h4>There is always room to improve!</h4>
+                </div>
               </div>
               <h2 class="headingText">Sub Scores:</h2>
               <GradeCards gradesInfo={gradesData}/>
             </div>
             : 
-            <div id="mydivoff" class="split left">
+            <div id="mydivoff" class="split_left">
               <h2 class="headingText">Top 3 Job Categories:</h2>
               <CategoryCards catInfo = {catData}/>
               <h2 class="headingText">Reccomended Jobs:</h2>
@@ -178,7 +200,7 @@ let handleFileSubmit= async (e)=>{
             
             
               
-            <div class="split right ">
+            <div class="split_right ">
                 <div>
                     <button type="button" form="nameform" id="switchButton" onClick={()=> handleSwitchChange() } >Switch Mode</button>
                     
@@ -203,7 +225,7 @@ let handleFileSubmit= async (e)=>{
             </div>
         </div>
       }
-    </>
+    </div>
     
   );
 }

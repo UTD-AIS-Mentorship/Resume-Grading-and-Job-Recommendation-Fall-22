@@ -6,3 +6,4 @@ pandas
 scikit-learn
 sklearn
 xgboost
+waitress

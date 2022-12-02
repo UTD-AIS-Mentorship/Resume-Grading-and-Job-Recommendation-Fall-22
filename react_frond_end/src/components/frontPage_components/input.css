@@ -32,7 +32,7 @@ label:hover {
     /* left: 50%; */
     /* transform: translate(-50%, -50%); */
     position: relative;
-    
+    text-decoration: none;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -43,4 +43,11 @@ label:hover {
     transition: all 300ms ease;
     transform-origin: bottom;
     cursor: pointer;
+}
+
+#continue_button:hover{
+    background-color: var(--color3);
+    color: var(--color1);
+    transition:  all 0.3s ease-out;
+    transition: 250ms;
 }

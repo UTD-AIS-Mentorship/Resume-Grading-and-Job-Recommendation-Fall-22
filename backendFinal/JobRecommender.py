@@ -69,7 +69,7 @@ class JobRecommender:
         # Create and return a dataframe composed of the top 10 job recommendations
         counter = 0
         for job in top_10_jobs:
-            print(JobRecommender.job_df.iloc[job]["url"])
+            #print(JobRecommender.job_df.iloc[job]["url"])
             top_10_jobs_df.loc[len(top_10_jobs_df.index)] = JobRecommender.job_df.iloc[job]
             top_10_jobs_df.loc[counter]["similarity score"] = cosine_similarities[job]
             counter += 1

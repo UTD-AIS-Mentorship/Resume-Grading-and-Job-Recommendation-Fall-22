@@ -21,7 +21,7 @@ function HeroSection() {
         </Button>
       </div>     */}
       <div id="wrapper">
-            <svg id="Robot" width="292" height="483" viewBox="0 0 350 483" fill="none" xmlns="http://www.w3.org/2000/svg"
+            <svg id="Robot" width="342" height="533" viewBox="0 0 350 483" fill="none" xmlns="http://www.w3.org/2000/svg"
                 data-click="0">
                 <g data-configuration="0">
                     <path id="RightLeg" fill-rule="evenodd" clip-rule="evenodd"
@@ -68,7 +68,7 @@ function HeroSection() {
                 
                 
               </div>
-              <Link to='/resumeChecker' >
+              <Link to='/resumeChecker' style={{textDecoration: 'none'}}>
                   <button id="continue_button">Get Started</button>
               </Link>
               

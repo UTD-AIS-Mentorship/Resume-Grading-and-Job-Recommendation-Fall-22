@@ -14,22 +14,12 @@ function CategoryCards(data) {
                     data['catInfo'].map( (value) => ( 
                     <CategoryCardItem  
                     title={value[0]} 
-                    text={value[1]} 
-                    rank= {"1"}/>
+                    percent={value[1]}/>
                     ))   
                 }
                 
                     
-                    <CategoryCardItem 
-                        rank="2"
-                        title="Filler"
-                        text="Filler"
-                    />
-                    <CategoryCardItem 
-                        rank="3"
-                        title="Filler"
-                        text="Filler"
-                    />
+                    
                 
             </div>
         </div>

@@ -1,5 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { CircularProgressbar } from 'react-circular-progressbar';
+import "react-circular-progressbar/dist/styles.css"
+import VisibilitySensor from "react-visibility-sensor";
 
 
 function CategoryCardItem(props) {
@@ -15,9 +18,15 @@ function CategoryCardItem(props) {
                     <h5 className='catCards__item__categoryText'>{props.text}</h5>
                   </div> 
                   <div className='catCards_right'>
-                    <div className='rank_square'>
-                      <h1 className='catCards__item__categoryRank'>{props.rank}</h1>
-                    </div>
+                    <VisibilitySensor>
+                        {({ isVisible }) => {
+                        const percentage = isVisible ? props.percent : 0;
+                        return (
+                          <CircularProgressbar value={percentage} text={`${percentage}%`}/>
+                        );
+                        }}
+                      </VisibilitySensor>
+                    
                   </div> 
 
                 </div>
