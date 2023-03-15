@@ -25,21 +25,20 @@ Resume Classification:
 Trained 3 distinct machine learning models with a Kaggle dataset of 2400+ resumes with the goal of acheiving the highest accuracy. 
 
 Logistic Regression - 67%
-
-<img src='https://imgur.com/a/ahVzaHC' title='Logistic Regression Heatmap' width='' alt='Logistic Regression Heatmap' />
+![lrheatmap](https://i.imgur.com/3FbstE4.png)
 
 Random Forest - 60%
-![rfheatmap](https://imgur.com/BQ5dzcb)
+![rfheatmap](https://i.imgur.com/BQ5dzcb.png)
 
 XGBoost - 73%
-![xgboostheatmap](https://imgur.com/a/zOwJLP9)
+![xgboostheatmap](https://i.imgur.com/7SQheNl.png)
 
 
 Job Recommendation:
 
 Used NLTK to create a bag-of-words from a Kaggle dataset of 30000+ jobs and ScikitLearn's cosine similarity to compare the resume with web-scrapped job postings (using BeautifulSoup) from Indeed. Returned the top 10 best matched Indeed job postings. 
 
-![vectorizerimg](https://imgur.com/a/h0XG8E8)
+![vectorizerimg](https://i.imgur.com/bZhyKl1.png)
 
 
 
@@ -50,8 +49,11 @@ Used NLTK to create a bag-of-words from a Kaggle dataset of 30000+ jobs and Scik
 ## Deployment
 
 Once our functionalities were combined, we deployed our react.js front-end and flask back-end onto AWS EC2. 
-![deploymentimg](https://imgur.com/a/jCPiVcC)
+![deploymentimg](https://i.imgur.com/4qdhfvk.png)
 ## Demo
 
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSnY9GgOxlTkMaSDGUMpw4ki9xTylrgC3MnC3y2XFjNrwXfrnUKu-Y7gGzh2S3DUsCy-VBleB2CJWwW/embed?start=true&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+Demo to come :)
 
+Link to our presentation!
+
+https://tinyurl.com/vbu4a47n
