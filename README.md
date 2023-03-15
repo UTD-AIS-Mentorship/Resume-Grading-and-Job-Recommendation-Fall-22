@@ -15,29 +15,29 @@ ResuBot is a tool designed to help people improve their resumes and receive job 
 
 ## How
 
-Resume Grading:
+## Resume Grading: ##
 
 Used NLTK and LanguageTool in conjunction to grade the resume content based on strong action actions words, spelling, quantifiable data, grammar, and the average sentence length. 
 
 
-Resume Classification:
+## Resume Classification: ##
 
 Trained 3 distinct machine learning models with a Kaggle dataset of 2400+ resumes with the goal of acheiving the highest accuracy. 
 
 
-Logistic Regression - 67%
+_Logistic Regression - 67%_
 
 ![lrheatmap](https://i.imgur.com/3FbstE4.png)
 
 
 
-Random Forest - 60%
+_Random Forest - 60%_
 
 ![rfheatmap](https://i.imgur.com/BQ5dzcb.png)
 
 
 
-XGBoost - 73%
+_XGBoost - 73%_
 
 ![xgboostheatmap](https://i.imgur.com/7SQheNl.png)
 
