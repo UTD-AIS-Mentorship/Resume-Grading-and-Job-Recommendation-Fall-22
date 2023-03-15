@@ -25,7 +25,8 @@ Resume Classification:
 Trained 3 distinct machine learning models with a Kaggle dataset of 2400+ resumes with the goal of acheiving the highest accuracy. 
 
 Logistic Regression - 67%
-![lrheatmap](https://imgur.com/a/ahVzaHC)
+
+<img src='https://imgur.com/a/ahVzaHC' title='Logistic Regression Heatmap' width='' alt='Logistic Regression Heatmap' />
 
 Random Forest - 60%
 ![rfheatmap](https://imgur.com/a/2lpl4Lg)
