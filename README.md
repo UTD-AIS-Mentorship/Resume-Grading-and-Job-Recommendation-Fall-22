@@ -29,7 +29,7 @@ Logistic Regression - 67%
 <img src='https://imgur.com/a/ahVzaHC' title='Logistic Regression Heatmap' width='' alt='Logistic Regression Heatmap' />
 
 Random Forest - 60%
-![rfheatmap](https://imgur.com/a/2lpl4Lg)
+![rfheatmap](https://imgur.com/BQ5dzcb)
 
 XGBoost - 73%
 ![xgboostheatmap](https://imgur.com/a/zOwJLP9)
