@@ -62,6 +62,7 @@ Once our functionalities were combined, we deployed our react.js front-end and f
 ## Demo
 
 Demo to come :)
+Live Demo: https://www.youtube.com/live/HAyAWdbnM7g?feature=share&t=2369
 
 Link to our presentation!
 
