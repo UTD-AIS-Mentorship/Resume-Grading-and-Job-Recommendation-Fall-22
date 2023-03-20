@@ -67,3 +67,10 @@ Live Demo: https://www.youtube.com/live/HAyAWdbnM7g?feature=share&t=2369
 Link to our presentation!
 
 https://tinyurl.com/vbu4a47n
+
+## Datasets
+
+Resume Parser - Dataset https://www.kaggle.com/datasets/gauravduttakiit/resume-dataset
+Employment Skills - https://www.kaggle.com/datasets/maneeshdisodia/employment-skills
+Jobs - https://www.kaggle.com/datasets/kuchhbhi/latest-30k-jobs-data
+Resume Dataset (*NEW*) - https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset
